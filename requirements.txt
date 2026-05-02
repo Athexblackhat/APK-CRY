@@ -1,0 +1,6 @@
+customtkinter
+tkinter
+shutil
+zipfile
+tempfile
+struct

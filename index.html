@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="APK Crypter Pro - APK-CRY Protocol. Military-grade APK protection with 10+ security layers. Hardware-locked licensing. The ultimate Android application security suite.">
+    <meta name="keywords" content="APK Crypter, APK Protection, Android Security, DEX Encryption, APK Obfuscation, Anti-Reverse Engineering">
+    <meta name="author" content="APK-CRY Security Systems">
+    <meta name="theme-color" content="#8B0000">
+    
+    <title>APK CRY | APK-CRY Protocol - Ultimate APK Protection Suite</title>
+    
+    <style>
+        /* ============================================================
+           FONTS & ROOT VARIABLES
+           ============================================================ */
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        :root {
+            --blood-primary: #8B0000;
+            --blood-dark: #1A0000;
+            --blood-darker: #0A0000;
+            --blood-light: #FF0000;
+            --blood-glow: #FF3333;
+            --blood-accent: #DC143C;
+            --blood-text: #FFE4E1;
+            --blood-gold: #FFD700;
+            --blood-black: #000000;
+            --blood-gray: #1A1A1A;
+            --neon-red: #FF0040;
+            --dark-blood: #2B0000;
+            --crimson: #DC143C;
+            --scarlet: #FF2400;
+            --maroon: #800000;
+            
+            --gradient-blood: linear-gradient(135deg, #8B0000, #FF0000, #DC143C);
+            --gradient-dark: linear-gradient(180deg, #0A0000, #000000);
+            --gradient-card: linear-gradient(135deg, #1A0000, #0A0A0A);
+            
+            --shadow-red: 0 0 30px rgba(255, 0, 0, 0.3);
+            --shadow-gold: 0 0 20px rgba(255, 215, 0, 0.3);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5);
+            
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --radius-xl: 30px;
+            
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ============================================================
+           RESET & BASE
+           ============================================================ */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            font-family: 'Inter', 'Rajdhani', sans-serif;
+            background: var(--blood-black);
+            color: var(--blood-text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* ============================================================
+           CUSTOM CURSOR
+           ============================================================ */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--blood-light);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 99999;
+            transition: transform 0.1s ease;
+            mix-blend-mode: difference;
+        }
+        .cursor-dot {
+            width: 4px;
+            height: 4px;
+            background: var(--blood-light);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 99999;
+        }
+
+        /* ============================================================
+           PARTICLE BACKGROUND
+           ============================================================ */
+        #particles {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* ============================================================
+           BLOOD DRIP ANIMATIONS
+           ============================================================ */
+        @keyframes bloodDrip {
+            0% { height: 0; opacity: 1; }
+            40% { height: 100px; opacity: 0.8; }
+            70% { height: 180px; opacity: 0.4; }
+            100% { height: 250px; opacity: 0; }
+        }
+        .blood-drip {
+            position: fixed;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--blood-light), transparent);
+            animation: bloodDrip 4s infinite;
+            z-index: 1;
+            pointer-events: none;
+            border-radius: 2px;
+        }
+
+        /* ============================================================
+           NAVIGATION
+           ============================================================ */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 2px solid var(--blood-primary);
+            z-index: 10000;
+            transition: var(--transition);
+        }
+        .navbar.scrolled {
+            box-shadow: 0 10px 40px rgba(139, 0, 0, 0.5);
+            border-bottom-color: var(--blood-light);
+        }
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 26px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            background: var(--gradient-blood);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: logoGlow 2s infinite;
+        }
+        @keyframes logoGlow {
+            0%, 100% { filter: brightness(1) drop-shadow(0 0 10px rgba(255,0,0,0.5)); }
+            50% { filter: brightness(1.5) drop-shadow(0 0 20px rgba(255,0,0,0.8)); }
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            align-items: center;
+        }
+        .nav-links a {
+            color: var(--blood-text);
+            text-decoration: none;
+            font-family: 'JetBrains Mono', 'Rajdhani', monospace;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: var(--transition);
+            position: relative;
+            padding: 5px 0;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--blood-light);
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover { color: var(--blood-light); text-shadow: 0 0 10px var(--blood-glow); }
+        .nav-links a:hover::after { width: 100%; }
+
+        .btn-nav {
+            background: var(--gradient-blood);
+            color: white;
+            padding: 12px 28px;
+            border: 2px solid var(--blood-light);
+            border-radius: var(--radius-sm);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-nav:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-red);
+        }
+        .btn-nav::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--blood-light);
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        /* ============================================================
+           HERO SECTION
+           ============================================================ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 100px 20px 60px;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255,0,0,0.15), transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            max-width: 900px;
+        }
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255,0,0,0.1);
+            border: 1px solid var(--blood-primary);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            letter-spacing: 3px;
+            color: var(--blood-light);
+            margin-bottom: 25px;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(255,0,0,0.4); }
+            50% { box-shadow: 0 0 0 15px rgba(255,0,0,0); }
+        }
+        .hero-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(36px, 6vw, 72px);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #FF0000, #FF4444, #DC143C, #FF0000);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease infinite;
+        }
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        .hero-subtitle {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(16px, 2.5vw, 20px);
+            color: var(--blood-glow);
+            text-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+            margin-bottom: 15px;
+            letter-spacing: 3px;
+        }
+        .hero-description {
+            font-size: 18px;
+            color: #ccc;
+            margin-bottom: 35px;
+            line-height: 1.7;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn-hero-primary {
+            background: var(--gradient-blood);
+            color: white;
+            padding: 18px 40px;
+            border: 3px solid var(--blood-light);
+            border-radius: var(--radius-md);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: var(--transition);
+            animation: btnPulse 2s infinite;
+            text-decoration: none;
+            display: inline-block;
+        }
+        @keyframes btnPulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 0, 0, 0.4); }
+            50% { box-shadow: 0 0 50px rgba(255, 0, 0, 0.8), 0 0 80px rgba(255, 0, 0, 0.4); }
+        }
+        .btn-hero-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 0, 0, 0.6);
+        }
+        .btn-hero-secondary {
+            background: transparent;
+            color: var(--blood-light);
+            padding: 18px 40px;
+            border: 2px solid var(--blood-light);
+            border-radius: var(--radius-md);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-hero-secondary:hover {
+            background: rgba(255, 0, 0, 0.1);
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.3);
+        }
+
+        /* ============================================================
+           SECTION STYLES
+           ============================================================ */
+        section {
+            padding: 100px 20px;
+            position: relative;
+            z-index: 2;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(28px, 4vw, 42px);
+            text-align: center;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, var(--blood-light), var(--blood-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .section-subtitle {
+            text-align: center;
+            color: #999;
+            font-size: 16px;
+            margin-bottom: 60px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ============================================================
+           FEATURES GRID
+           ============================================================ */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+        .feature-card {
+            background: var(--gradient-card);
+            border: 1px solid rgba(139, 0, 0, 0.3);
+            border-radius: var(--radius-lg);
+            padding: 35px 30px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(135deg, transparent, rgba(255,0,0,0.03), transparent);
+        }
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--blood-light);
+            box-shadow: var(--shadow-red);
+        }
+        .feature-icon {
+            font-size: 45px;
+            margin-bottom: 18px;
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        .feature-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 18px;
+            color: var(--blood-light);
+            margin-bottom: 12px;
+        }
+        .feature-card p {
+            color: #999;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        /* ============================================================
+           SECURITY LAYERS
+           ============================================================ */
+        .layers-section {
+            background: linear-gradient(180deg, transparent, rgba(139,0,0,0.05), transparent);
+        }
+        .layers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            counter-reset: layer;
+        }
+        .layer-item {
+            background: var(--gradient-card);
+            border: 1px solid rgba(139, 0, 0, 0.2);
+            border-radius: var(--radius-md);
+            padding: 25px;
+            text-align: center;
+            transition: var(--transition);
+            position: relative;
+        }
+        .layer-item::before {
+            counter-increment: layer;
+            content: "0" counter(layer);
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 48px;
+            font-weight: 900;
+            color: rgba(255, 0, 0, 0.1);
+        }
+        .layer-item:hover {
+            border-color: var(--blood-light);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-red);
+        }
+        .layer-item .layer-icon {
+            font-size: 35px;
+            margin-bottom: 12px;
+        }
+        .layer-item h4 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--blood-light);
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        .layer-item p {
+            font-size: 12px;
+            color: #888;
+        }
+
+        /* ============================================================
+           PRICING SECTION
+           ============================================================ */
+        .pricing-section {
+            background: linear-gradient(180deg, transparent, rgba(139,0,0,0.08), transparent);
+        }
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            align-items: stretch;
+        }
+        .pricing-card {
+            background: var(--gradient-card);
+            border: 2px solid rgba(139, 0, 0, 0.3);
+            border-radius: var(--radius-xl);
+            padding: 45px 30px;
+            text-align: center;
+            transition: var(--transition);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+        .pricing-card.featured {
+            border-color: var(--blood-light);
+            background: linear-gradient(135deg, #1A0000, #2B0000, #1A0000);
+            box-shadow: var(--shadow-red);
+            transform: scale(1.03);
+        }
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+        .pricing-badge {
+            position: absolute;
+            top: -18px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gradient-blood);
+            color: white;
+            padding: 8px 25px;
+            border-radius: 50px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            white-space: nowrap;
+        }
+        .pricing-card.free {
+            border-color: #00ff8833;
+            border-style: dashed;
+        }
+        .pricing-card.free .pricing-badge {
+            background: linear-gradient(135deg, #00ff88, #00cc66);
+        }
+        .plan-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 22px;
+            color: var(--blood-light);
+            margin: 10px 0;
+        }
+        .pricing-card.free .plan-name { color: #00ff88; }
+        .plan-price {
+            font-size: 48px;
+            font-weight: 900;
+            color: white;
+            margin: 15px 0;
+        }
+        .plan-price span {
+            font-size: 16px;
+            color: #999;
+            font-weight: 400;
+        }
+        .plan-features {
+            list-style: none;
+            text-align: left;
+            margin: 25px 0;
+            flex-grow: 1;
+        }
+        .plan-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            color: #ccc;
+            font-size: 14px;
+        }
+        .plan-features li::before {
+            content: '✓';
+            color: var(--blood-light);
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        .pricing-card.free .plan-features li::before { color: #00ff88; }
+        .plan-features li.disabled {
+            color: #555;
+            text-decoration: line-through;
+        }
+        .plan-features li.disabled::before {
+            content: '✗';
+            color: #555;
+        }
+        .btn-plan {
+            width: 100%;
+            padding: 16px;
+            border-radius: var(--radius-md);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid var(--blood-light);
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-plan-outline {
+            background: transparent;
+            color: var(--blood-light);
+        }
+        .btn-plan-outline:hover { background: rgba(255,0,0,0.1); }
+        .btn-plan-filled {
+            background: var(--gradient-blood);
+            color: white;
+        }
+        .btn-plan-filled:hover { box-shadow: var(--shadow-red); }
+        .btn-plan-free {
+            background: linear-gradient(135deg, #00ff88, #00cc66);
+            border-color: #00ff88;
+            color: #000;
+        }
+        .btn-plan-free:hover { box-shadow: 0 0 30px rgba(0,255,136,0.4); }
+
+        /* ============================================================
+           COMPARISON TABLE
+           ============================================================ */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 40px;
+            background: var(--gradient-card);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+        }
+        .comparison-table th,
+        .comparison-table td {
+            padding: 18px 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-size: 13px;
+        }
+        .comparison-table th {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--blood-light);
+            font-size: 14px;
+            background: rgba(139,0,0,0.2);
+        }
+        .comparison-table td:first-child {
+            text-align: left;
+            font-weight: 500;
+            color: #ccc;
+        }
+        .comparison-table .check { color: #00ff88; font-size: 18px; }
+        .comparison-table .cross { color: #ff4444; font-size: 18px; }
+        .comparison-table tr:hover {
+            background: rgba(255,0,0,0.05);
+        }
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 0 -20px;
+            padding: 0 20px;
+        }
+
+        /* ============================================================
+           DOWNLOAD SECTION
+           ============================================================ */
+        .download-section {
+            background: linear-gradient(180deg, transparent, rgba(139,0,0,0.1), transparent);
+        }
+        .download-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        .download-card {
+            background: var(--gradient-card);
+            border: 2px solid rgba(139, 0, 0, 0.3);
+            border-radius: var(--radius-xl);
+            padding: 40px 30px;
+            text-align: center;
+            transition: var(--transition);
+        }
+        .download-card:hover {
+            border-color: var(--blood-light);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-red);
+        }
+        .download-icon {
+            font-size: 55px;
+            margin-bottom: 18px;
+        }
+        .download-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--blood-light);
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        .download-card .version {
+            color: #666;
+            font-size: 12px;
+            margin: 8px 0;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .btn-download {
+            display: inline-block;
+            padding: 14px 35px;
+            background: var(--gradient-blood);
+            color: white;
+            border: 2px solid var(--blood-light);
+            border-radius: var(--radius-md);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            margin-top: 15px;
+        }
+        .btn-download:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-red);
+        }
+        .btn-download.linux-btn {
+            background: transparent;
+            border-color: #ff9900;
+            color: #ff9900;
+        }
+        .btn-download.linux-btn:hover {
+            background: rgba(255,153,0,0.1);
+            box-shadow: 0 0 30px rgba(255,153,0,0.3);
+        }
+
+        /* ============================================================
+           STATS SECTION
+           ============================================================ */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+        .stat-item {
+            padding: 30px;
+            background: var(--gradient-card);
+            border: 1px solid rgba(139,0,0,0.2);
+            border-radius: var(--radius-lg);
+        }
+        .stat-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 48px;
+            font-weight: 900;
+            color: var(--blood-light);
+            text-shadow: 0 0 30px rgba(255,0,0,0.5);
+        }
+        .stat-label {
+            color: #999;
+            font-size: 14px;
+            margin-top: 8px;
+        }
+
+        /* ============================================================
+           TESTIMONIALS
+           ============================================================ */
+        .testimonial-card {
+            background: var(--gradient-card);
+            border: 1px solid rgba(139,0,0,0.3);
+            border-radius: var(--radius-xl);
+            padding: 40px;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .testimonial-text {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #ccc;
+            font-style: italic;
+            margin-bottom: 25px;
+        }
+        .testimonial-author {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--blood-light);
+        }
+        .testimonial-role {
+            color: #777;
+            font-size: 13px;
+        }
+
+        /* ============================================================
+           FOOTER
+           ============================================================ */
+        .footer {
+            background: var(--blood-darker);
+            border-top: 2px solid var(--blood-primary);
+            padding: 60px 0 25px;
+            text-align: center;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        .footer-links a {
+            color: #999;
+            text-decoration: none;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: var(--transition);
+        }
+        .footer-links a:hover { color: var(--blood-light); }
+        .footer-copyright {
+            color: #666;
+            font-size: 13px;
+        }
+        .footer-warning {
+            color: var(--blood-light);
+            font-size: 12px;
+            margin-top: 10px;
+        }
+
+        /* ============================================================
+           SCROLLBAR
+           ============================================================ */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--blood-black); }
+        ::-webkit-scrollbar-thumb { background: var(--blood-primary); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--blood-light); }
+
+        /* ============================================================
+           RESPONSIVE
+           ============================================================ */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(10, 0, 0, 0.98);
+                flex-direction: column;
+                padding: 20px;
+                border-bottom: 2px solid var(--blood-primary);
+                gap: 15px;
+            }
+            .nav-links.active { display: flex; }
+            .mobile-toggle { display: block; }
+            .hero-title { font-size: 32px; }
+            .pricing-card.featured { transform: none; }
+            .pricing-card.featured:hover { transform: translateY(-10px); }
+        }
+
+        /* ============================================================
+           TOAST NOTIFICATION
+           ============================================================ */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--gradient-blood);
+            color: white;
+            padding: 18px 25px;
+            border-radius: var(--radius-md);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 13px;
+            z-index: 99999;
+            animation: slideUp 0.4s ease, fadeOut 0.4s ease 2.6s forwards;
+            box-shadow: var(--shadow-lg);
+        }
+        @keyframes slideUp {
+            from { transform: translateY(100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes fadeOut {
+            to { opacity: 0; transform: translateY(20px); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-dot"></div>
+
+    <!-- Particle Background -->
+    <canvas id="particles"></canvas>
+
+    <!-- Blood Drips -->
+    <div class="blood-drip" style="left:5%;top:-250px;"></div>
+    <div class="blood-drip" style="left:15%;top:-250px;animation-delay:1s;"></div>
+    <div class="blood-drip" style="left:25%;top:-250px;animation-delay:2s;"></div>
+    <div class="blood-drip" style="left:35%;top:-250px;animation-delay:0.5s;"></div>
+    <div class="blood-drip" style="left:45%;top:-250px;animation-delay:1.5s;"></div>
+    <div class="blood-drip" style="left:55%;top:-250px;animation-delay:3s;"></div>
+    <div class="blood-drip" style="left:65%;top:-250px;animation-delay:0.8s;"></div>
+    <div class="blood-drip" style="left:75%;top:-250px;animation-delay:2.2s;"></div>
+    <div class="blood-drip" style="left:85%;top:-250px;animation-delay:1.8s;"></div>
+    <div class="blood-drip" style="left:95%;top:-250px;animation-delay:2.8s;"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">APK CRYPTER PRO</div>
+            <button class="mobile-toggle" onclick="toggleMenu()">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#layers">Security</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#compare">Compare</a></li>
+                <li><a href="#download">Download</a></li>
+                <li><button class="btn-nav" onclick="scrollToSection('download')">⚡ DOWNLOAD</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-badge">🔒 APK-CRY PROTOCOL</div>
+            <h1 class="hero-title">APK CRYPTER PRO</h1>
+            <p class="hero-subtitle">THE ULTIMATE APK PROTECTION SUITE</p>
+            <p class="hero-description">
+                Military-grade encryption. <strong>10+ security layers</strong>. 
+                Hardware-locked licensing. Protect your Android applications from 
+                reverse engineering, tampering, and static analysis with the world's 
+                most advanced APK crypter.
+            </p>
+            <div class="hero-buttons">
+                <a href="/downloads/setup.zip" class="btn-hero-primary">⚡ DOWNLOAD NOW</a>
+                <a href="#pricing" class="btn-hero-secondary">VIEW PLANS</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features">
+        <div class="container">
+            <h2 class="section-title">🔥 POWERFUL FEATURES</h2>
+            <p class="section-subtitle">Enterprise-grade protection engineered for maximum security</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Multi-Layer DEX Encryption</h3>
+                    <p>Advanced encryption for .dex files with custom runtime decryption stubs and polymorphic key generation.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Anti-Reverse Engineering</h3>
+                    <p>Detect and prevent debugging, emulation, and VM environments. Real-time runtime application self-protection.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎭</div>
+                    <h3>Code Obfuscation</h3>
+                    <p>Class/method renaming, junk code injection, control flow obfuscation, and string encryption.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔐</div>
+                    <h3>Hardware-Locked Licensing</h3>
+                    <p>RSA-4096 signed licenses bound to specific hardware. Military-grade offline verification.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📦</div>
+                    <h3>APK Pseudo-Encryption</h3>
+                    <p>Manipulate APK structure to confuse standard decompilers and static analysis tools.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>V2/V3/V4 Signing</h3>
+                    <p>Advanced APK signature scheme support with integrity verification and anti-tampering.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Security Layers -->
+    <section class="layers-section" id="layers">
+        <div class="container">
+            <h2 class="section-title">🛡️ 10+ SECURITY LAYERS</h2>
+            <p class="section-subtitle">Comprehensive protection against all known attack vectors</p>
+            <div class="layers-grid">
+                <div class="layer-item"><div class="layer-icon">🔐</div><h4>DEX Encryption</h4><p>Multi-layer AES-256 encryption</p></div>
+                <div class="layer-item"><div class="layer-icon">🎭</div><h4>Pseudo-Encryption</h4><p>Decompiler confusion techniques</p></div>
+                <div class="layer-item"><div class="layer-icon">🔀</div><h4>Code Obfuscation</h4><p>Class/method renaming & junk code</p></div>
+                <div class="layer-item"><div class="layer-icon">🛡️</div><h4>Anti-Tampering</h4><p>Integrity verification checks</p></div>
+                <div class="layer-item"><div class="layer-icon">🐛</div><h4>Anti-Debugging</h4><p>Debugger & tracer detection</p></div>
+                <div class="layer-item"><div class="layer-icon">💻</div><h4>Anti-VM Detection</h4><p>Virtual machine identification</p></div>
+                <div class="layer-item"><div class="layer-icon">🔌</div><h4>API Protection</h4><p>Sensitive API call hiding</p></div>
+                <div class="layer-item"><div class="layer-icon">📋</div><h4>Manifest Scramble</h4><p>AndroidManifest obfuscation</p></div>
+                <div class="layer-item"><div class="layer-icon">📚</div><h4>Library Protection</h4><p>Native .so file encryption</p></div>
+                <div class="layer-item"><div class="layer-icon">📦</div><h4>Resource Shrinking</h4><p>Optimization & obfuscation</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section" id="pricing">
+        <div class="container">
+            <h2 class="section-title">💀 PRICING PLANS</h2>
+            <p class="section-subtitle">Choose the protection level that fits your needs</p>
+            <div class="pricing-grid">
+                <!-- Free -->
+                <div class="pricing-card free">
+                    <div class="pricing-badge">🎉 FREE</div>
+                    <h3 class="plan-name">COMMUNITY</h3>
+                    <div class="plan-price">$0<span>/forever</span></div>
+                    <ul class="plan-features">
+                        <li>Standard DEX Encryption</li>
+                        <li>Basic Obfuscation</li>
+                        <li>Windows Support</li>
+                        <li>3 APKs/month</li>
+                        <li>Community Support</li>
+                        <li>1 Device</li>
+                        <li class="disabled">Anti-VM Protection</li>
+                        <li class="disabled">Anti-Debug</li>
+                        <li class="disabled">API Protection</li>
+                        <li class="disabled">Priority Support</li>
+                    </ul>
+                    <a href="/downloads/setup.zip" class="btn-plan btn-plan-free" onclick="startDownload('free')">⬇️ DOWNLOAD FREE</a>
+                </div>
+
+                <!-- Pro -->
+                <div class="pricing-card featured">
+                    <div class="pricing-badge">⭐ MOST POPULAR</div>
+                    <h3 class="plan-name">PROFESSIONAL</h3>
+                    <div class="plan-price">$149<span>/month</span></div>
+                    <ul class="plan-features">
+                        <li>Advanced Multi-Layer Encryption</li>
+                        <li>Full Obfuscation Suite</li>
+                        <li>Anti-VM Detection</li>
+                        <li>Anti-Debug Protection</li>
+                        <li>Anti-Tampering</li>
+                        <li>API Protection</li>
+                        <li>Cross-Platform</li>
+                        <li>Unlimited APKs</li>
+                        <li>Priority Support</li>
+                        <li>3 Devices</li>
+                    </ul>
+                    <a href="https://wa.me/+923490916663" class="btn-plan btn-plan-filled" onclick="startDownload('pro')">⚡ GET PRO</a>
+                </div>
+
+                <!-- Enterprise -->
+                <div class="pricing-card">
+                    <div class="pricing-badge">🏢 ENTERPRISE</div>
+                    <h3 class="plan-name">ENTERPRISE</h3>
+                    <div class="plan-price">$499<span>/month</span></div>
+                    <ul class="plan-features">
+                        <li>Military-Grade Encryption</li>
+                        <li>Quantum-Resistant</li>
+                        <li>Full Source Code Access</li>
+                        <li>Dedicated Server</li>
+                        <li>24/7 Phone Support</li>
+                        <li>SLA Guarantee</li>
+                        <li>Team Management</li>
+                        <li>10 Devices</li>
+                        <li>Custom Algorithms</li>
+                        <li>On-Premise Option</li>
+                    </ul>
+                    <a href="https://wa.me/+923490916663" class="btn-plan btn-plan-outline" onclick="startDownload('enterprise')">🔒 GET ENTERPRISE</a>
+                </div>
+
+                <!-- Platinum -->
+                <div class="pricing-card">
+                    <div class="pricing-badge">💎 PLATINUM</div>
+                    <h3 class="plan-name">PLATINUM</h3>
+                    <div class="plan-price">$999<span>/month</span></div>
+                    <ul class="plan-features">
+                        <li>ALL FEATURES UNLOCKED</li>
+                        <li>Lifetime Access Option</li>
+                        <li>Full Source Code</li>
+                        <li>Dedicated Developer</li>
+                        <li>Custom Integration</li>
+                        <li>Unlimited Devices</li>
+                        <li>First-Class Support</li>
+                        <li>Revenue Share</li>
+                        <li>Co-Branding Rights</li>
+                        <li>Beta Access</li>
+                    </ul>
+                    <a href="https://wa.me/+923490916663" class="btn-plan btn-plan-outline" onclick="startDownload('platinum')">💎 GET PLATINUM</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Table -->
+    <section id="compare">
+        <div class="container">
+            <h2 class="section-title">📊 VERSION COMPARISON</h2>
+            <p class="section-subtitle">Detailed feature comparison across all plans</p>
+            <div class="table-wrapper">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>FREE</th>
+                            <th>PRO</th>
+                            <th>ENTERPRISE</th>
+                            <th>PLATINUM</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>DEX Encryption</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+                        <tr><td>Code Obfuscation</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+                        <tr><td>Pseudo-Encryption</td><td class="cross">✗</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+                        <tr><td>Anti-VM Detection</td><td class="cross">✗</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+                        <tr><td>Anti-Debugging</td><td class="cross">✗</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+                        <tr><td>Anti-Tampering</td><td class="cross">✗</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+                        <tr><td>API Protection</td><td class="cross">✗</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+                        <tr><td>Manifest Scramble</td><td class="cross">✗</td><td class="cross">✗</td><td class="check">✓</td><td class="check">✓</td></tr>
+                        <tr><td>Library Protection</td><td class="cross">✗</td><td class="cross">✗</td><td class="check">✓</td><td class="check">✓</td></tr>
+                        <tr><td>Resource Shrinking</td><td class="cross">✗</td><td class="cross">✗</td><td class="check">✓</td><td class="check">✓</td></tr>
+                        <tr><td>V2/V3/V4 Signing</td><td class="cross">✗</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+                        <tr><td>Hardware-Locked License</td><td class="cross">✗</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+                        <tr><td>RSA-4096 Signing</td><td class="cross">✗</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+                        <tr><td>Source Code Access</td><td class="cross">✗</td><td class="cross">✗</td><td class="check">✓</td><td class="check">✓</td></tr>
+                        <tr><td>Custom Algorithms</td><td class="cross">✗</td><td class="cross">✗</td><td class="check">✓</td><td class="check">✓</td></tr>
+                        <tr><td>APKs/Month</td><td>3</td><td>Unlimited</td><td>Unlimited</td><td>Unlimited</td></tr>
+                        <tr><td>Devices</td><td>1</td><td>3</td><td>10</td><td>∞</td></tr>
+                        <tr><td>Support</td><td>Community</td><td>Priority 24h</td><td>24/7 Phone</td><td>Dedicated</td></tr>
+                        <tr><td>Price</td><td><strong>FREE</strong></td><td><strong>$49</strong></td><td><strong>$99</strong></td><td><strong>$199</strong></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <section>
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item"><div class="stat-number">5K+</div><div class="stat-label">APKs Protected</div></div>
+                <div class="stat-item"><div class="stat-number">10+</div><div class="stat-label">Security Layers</div></div>
+                <div class="stat-item"><div class="stat-number">99.9%</div><div class="stat-label">Detection Rate</div></div>
+                <div class="stat-item"><div class="stat-number">24/7</div><div class="stat-label">Support Available</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section class="download-section" id="download">
+        <div class="container">
+            <h2 class="section-title">⬇️ DOWNLOAD</h2>
+            <p class="section-subtitle">Get APK Cry for your platform</p>
+            <div class="download-grid">
+                <!-- Windows -->
+                <div class="download-card">
+                    <div class="download-icon">🪟</div>
+                    <h3>Windows</h3>
+                    <p>Windows 10/11 (64-bit)</p>
+                    <p class="version">v2.0| APK-CRY Protocol</p>
+                    <a href="/downloads/setup.zip" class="btn-download" onclick="startDownload('windows'); return false;">
+                        ⬇️ DOWNLOAD
+                    </a>
+                    <p style="font-size:11px;color:#666;margin-top:8px;">Standalone executable</p>
+                </div>
+
+                <!-- Linux -->
+                <div class="download-card">
+                    <div class="download-icon">🐧</div>
+                    <h3>Linux</h3>
+                    <p>Ubuntu/Debian/Fedora/Arch</p>
+                    <p class="version">v4.0.0 | APK-CRY Protocol</p>
+                    <a href="https://github.com/Athexblackhat/APK-CRY" target="_blank" class="btn-download linux-btn">
+                        🔗 GITHUB REPO
+                    </a>
+                    <p style="font-size:11px;color:#666;margin-top:8px;">Source + Build Instructions</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">💬 TRUSTED BY DEVELOPERS</h2>
+            <div class="testimonial-card">
+                <p class="testimonial-text">"APK Cry Pro saved our application from being cracked within hours of release. The multi-layer encryption and hardware-locked licensing is absolutely incredible. Worth every penny!"</p>
+                <p class="testimonial-author">—</p>
+                <p class="testimonial-role"></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#features">Features</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#download">Download</a>
+                <a href="#">Documentation</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact</a>
+            </div>
+            <p class="footer-copyright">© 2026 APK Cry Pro | APK-CRY Protocol. All rights reserved.</p>
+            <p class="footer-warning">⚠️ For authorized security testing only. Unauthorized use is prohibited.</p>
+        </div>
+    </footer>
+
+    <script>
+        // ============================================================
+        // CUSTOM CURSOR
+        // ============================================================
+        const cursor = document.querySelector('.cursor');
+        const cursorDot = document.querySelector('.cursor-dot');
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX - 10 + 'px';
+            cursor.style.top = e.clientY - 10 + 'px';
+            cursorDot.style.left = e.clientX - 2 + 'px';
+            cursorDot.style.top = e.clientY - 2 + 'px';
+        });
+        
+        document.addEventListener('mousedown', () => {
+            cursor.style.transform = 'scale(1.5)';
+            cursorDot.style.transform = 'scale(2)';
+        });
+        
+        document.addEventListener('mouseup', () => {
+            cursor.style.transform = 'scale(1)';
+            cursorDot.style.transform = 'scale(1)';
+        });
+
+        // ============================================================
+        // NAVBAR SCROLL EFFECT
+        // ============================================================
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // ============================================================
+        // MOBILE MENU
+        // ============================================================
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        // Close mobile menu on link click
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('active');
+            });
+        });
+
+        // ============================================================
+        // SMOOTH SCROLL
+        // ============================================================
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // ============================================================
+        // DOWNLOAD FUNCTIONALITY
+        // ============================================================
+        function startDownload(platform) {
+            const downloadUrls = {
+                'free': '/downloads/setup.zip',
+            };
+
+            const url = downloadUrls[platform];
+            
+            if (url) {
+                showToast('⬇️ Starting download...');
+                setTimeout(() => {
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.download = url.split('/').pop();
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    
+                    showToast('✅ Download started! Check your downloads folder.');
+                }, 1500);
+            }
+        }
+
+        // ============================================================
+        // TOAST NOTIFICATION
+        // ============================================================
+        function showToast(message) {
+            // Remove existing toast
+            const existing = document.querySelector('.toast');
+            if (existing) existing.remove();
+            
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => toast.remove(), 3000);
+        }
+
+        // ============================================================
+        // PARTICLE SYSTEM
+        // ============================================================
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        const particles = [];
+        const particleCount = 80;
+        
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.3;
+                this.speedX = Math.random() * 0.5 - 0.25;
+                this.speedY = Math.random() * 0.5 - 0.25;
+                this.opacity = Math.random() * 0.5 + 0.1;
+                this.color = Math.random() > 0.6 ? '#8B0000' : '#FF0000';
+            }
+            
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                
+                if (this.x > canvas.width) this.x = 0;
+                if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                if (this.y < 0) this.y = canvas.height;
+            }
+            
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.globalAlpha = this.opacity;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+        
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
+        
+        function drawConnections() {
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < 120) {
+                        ctx.strokeStyle = '#8B0000';
+                        ctx.globalAlpha = 0.08 * (1 - distance / 120);
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+        
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.globalAlpha = 1;
+            
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            
+            drawConnections();
+            requestAnimationFrame(animate);
+        }
+        
+        animate();
+        
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // ============================================================
+        // SCROLL REVEAL ANIMATION
+        // ============================================================
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.feature-card, .pricing-card, .download-card, .layer-item, .stat-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+            observer.observe(el);
+        });
+
+        // ============================================================
+        // TYPING EFFECT
+        // ============================================================
+        const subtitle = document.querySelector('.hero-subtitle');
+        const originalText = subtitle.textContent;
+        subtitle.textContent = '';
+        let charIndex = 0;
+        
+        function typeWriter() {
+            if (charIndex < originalText.length) {
+                subtitle.textContent += originalText.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeWriter, 80);
+            }
+        }
+        
+        setTimeout(typeWriter, 500);
+
+        console.log(`
+
+           APK CRY - APK-CRY PROTOCOL   
+           Ultimate APK Protection Suite              
+           © 2026 - All Rights Reserved             
+        `);
+    </script>
+</body>
+</html>
