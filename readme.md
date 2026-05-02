@@ -6,7 +6,8 @@
 ![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux%20%7C%20macOS-00D4FF?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-Proprietary-FFD700?style=for-the-badge)
 ![Version](https://img.shields.io/badge/Version-2.0.0_Free-FF0000?style=for-the-badge)
-![Paid](https://img.shields.io/badge/Paid-Version_3.0_4._-FF0000?style=for-the-badge)
+![Paid](https://img.shields.io/badge/Paid-Version_3.0 &_4.0_-FF0000?style=for-the-badge)
+
 **The Ultimate Military-Grade APK Protection Suite**
 
 *10+ Security Layers | Hardware-Locked Licensing | RSA-4096 Digital Signatures*
