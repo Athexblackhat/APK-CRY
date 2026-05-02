@@ -332,4 +332,3 @@ Unauthorized copying, distribution, or use is strictly prohibited.
 
 
 <sub>© 2026 APK Cry | APK-CRY Protocol. All rights reserved. | Made with ❤️ for the security community</sub>
-```
