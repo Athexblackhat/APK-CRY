@@ -128,7 +128,7 @@ graph LR
     style GUI fill:#9945FF,color:#fff
     style PE fill:#8B0000,color:#fff
     style DB fill:#FFD700,color:#000
-    ```
+```
 
 ## Protection Flow
 
