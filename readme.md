@@ -43,7 +43,6 @@
 Built with a sophisticated multi-layered security architecture, it employs **10+ protection mechanisms** including DEX encryption, code obfuscation, anti-debugging, anti-VM detection, and hardware-bound licensing with RSA-4096 digital signatures.
 
 ```mermaid
-graph TB
     subgraph "APK CRY"
         A[📱 Original APK] --> B[🔍 Analysis Engine]
         B --> C{🛡️ Protection Layers}
@@ -211,15 +210,18 @@ Android SDK	Latest	Build tools
 ```
 ## Quick Install
 
-
+```
 git clone https://github.com/Athexblackhat/APK-CRY.git
 cd APK-CRY
-
+```
 # Install dependencies
+```
 pip install -r requirements.txt
-
+```
 # Run the application
+```
 python run.py
+```
 Platform-Specific
 <details> <summary><strong>🪟 Windows</strong></summary>
 
