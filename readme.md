@@ -15,6 +15,7 @@
 [Features](#-features) • [Installation](#-installation) • [Architecture](#-architecture) • [Security](#-security-layers) • [License](#-licensing-system) • [API](#-api-reference) • [FAQ](#-faq)
 
 
+
 ---
 
 ## 📖 Table of Contents
@@ -43,6 +44,7 @@
 Built with a sophisticated multi-layered security architecture, it employs **10+ protection mechanisms** including DEX encryption, code obfuscation, anti-debugging, anti-VM detection, and hardware-bound licensing with RSA-4096 digital signatures.
 
 ```mermaid
+graph TB
     subgraph "APK CRY"
         A[📱 Original APK] --> B[🔍 Analysis Engine]
         B --> C{🛡️ Protection Layers}
@@ -79,7 +81,7 @@ Built with a sophisticated multi-layered security architecture, it employs **10+
 
 ## 🏗️ Architecture
 
-mermaid```
+```mermaid
 graph LR
     subgraph "Frontend Layer"
         GUI[🖥️ PyQt6 GUI]
@@ -159,10 +161,8 @@ sequenceDiagram
     E->>F: Generate Signature
     E-->>G: Protection Complete
     G-->>U: Show Success
-```
-
+```    
 ## License Verification Flow
-
 ```mermaid
 sequenceDiagram
     participant U as 👤 User
@@ -214,11 +214,11 @@ Android SDK	Latest	Build tools
 git clone https://github.com/Athexblackhat/APK-CRY.git
 cd APK-CRY
 ```
-# Install dependencies
+## Install dependencies
 ```
 pip install -r requirements.txt
 ```
-# Run the application
+## Run the application
 ```
 python run.py
 ```
@@ -240,33 +240,44 @@ Execute Apk-cry.exe
 </details><details> <summary><strong>🐧 Linux</strong></summary>
 
 ## Ubuntu/Debian
+```
 sudo apt update
 sudo apt install python3-pip python3-pyqt6 openjdk-17-jdk android-sdk
-
+```
 ## Fedora
+```
 sudo dnf install python3-pip python3-pyqt6 java-17-openjdk android-tools
-
+```
 ## Arch
+```
 sudo pacman -S python-pip python-pyqt6 jdk17-openjdk android-sdk
-
+```
 ## Install Python deps
+```
 pip install -r requirements.txt
-
+```
 ## Run
+```
 python apk-cry.py
+```
 </details><details> <summary><strong>🍎 macOS</strong></summary>
 
 ## Install Homebrew if not installed
+```
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
+```
 ## Install dependencies
+```
 brew install python@3.11 openjdk@17 android-sdk
-
+```
 ## Install Python packages
+```
 pip3 install -r requirements.txt
-
+```
 ## Run
+```
 python3 apk-cry.py
+```
 </details>
 
 # PAID VERSION
@@ -315,11 +326,10 @@ This software is proprietary and confidential.
 Unauthorized copying, distribution, or use is strictly prohibited.
 ```
 
-<div align="center">
+
 🔗 Quick Links
 🌐 Website • 📚 Documentation • 💬 Support • 📧 Contact
 
 
 <sub>© 2026 APK Cry | APK-CRY Protocol. All rights reserved. | Made with ❤️ for the security community</sub>
-
-</div> ```
+```
