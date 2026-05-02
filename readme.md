@@ -160,8 +160,10 @@ sequenceDiagram
     E->>F: Generate Signature
     E-->>G: Protection Complete
     G-->>U: Show Success
-```    
+```
+
 ## License Verification Flow
+
 ```mermaid
 sequenceDiagram
     participant U as 👤 User
