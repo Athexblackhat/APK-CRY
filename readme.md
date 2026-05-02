@@ -33,6 +33,7 @@
 - [FAQ](#-faq)
 - [Contributing](#-contributing)
 - [Disclaimer](#-disclaimer)
+- [Web-Site](https://athexblackhat.github.io/APK-CRY)
 - [License](#-license)
 
 ---
@@ -325,10 +326,4 @@ All Rights Reserved.
 This software is proprietary and confidential.
 Unauthorized copying, distribution, or use is strictly prohibited.
 ```
-
-
-🔗 Quick Links
-🌐 Website • 📚 Documentation • 💬 Support • 📧 Contact
-
-
 <sub>© 2026 APK Cry | APK-CRY Protocol. All rights reserved. | Made with ❤️ for the security community</sub>
