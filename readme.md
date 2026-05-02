@@ -1,6 +1,6 @@
 <a href="https://github.com/Athexblackhat/APK-CRY"><img src="/src/apk-cry.png" alt="0" border="0" /></a> 
 # 🔐 APK CRY
-<div align="center">
+
 ![APK Cry](https://img.shields.io/badge/APK%20CRYPTER-PRO%20v4.0-8B0000?style=for-the-badge&logo=android&logoColor=white)
 ![Python](https://img.shields.io/badge/Python-3.9+-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux%20%7C%20macOS-00D4FF?style=for-the-badge)
@@ -13,7 +13,6 @@
 
 [Features](#-features) • [Installation](#-installation) • [Architecture](#-architecture) • [Security](#-security-layers) • [License](#-licensing-system) • [API](#-api-reference) • [FAQ](#-faq)
 
-</div>
 
 ---
 
